@@ -1,0 +1,107 @@
+# Upptime config — status.myocr.app
+# https://github.com/upptime/upptime
+#
+# Setup (10 min):
+# 1. Create new GitHub repo: Selaf688/myocr-status
+# 2. Copy this file as .upptimerc.yml in repo root
+# 3. Copy issue templates from .github/ folder (Upptime template ships them)
+# 4. Settings → Pages → Source: Deploy from branch → main / docs folder
+# 5. Settings → Secrets and variables → Actions:
+#    - GH_PAT: personal access token (repo scope) for issue creation
+#    - (optional) SLACK_WEBHOOK_URL / TELEGRAM_BOT_TOKEN+CHAT_ID for alerts
+# 6. CNAME: aggiungi DNS record `status.myocr.app` → `<username>.github.io` (Cloudflare DNS-only)
+# 7. Wait 5 min for first cron run (Upptime checks every 5 min)
+#
+# Owner sees alerts via GitHub issues auto-created on downtime. Public status page at:
+# https://status.myocr.app/
+
+owner: Selaf688
+repo: myocr-status
+
+sites:
+  - name: myocr.app (homepage)
+    url: https://www.myocr.app
+    expectedStatusCodes:
+      - 200
+      - 301
+
+  - name: API Status
+    url: https://api.myocr.app/v1/status
+    expectedStatusCodes:
+      - 200
+
+  - name: API Docs
+    url: https://www.myocr.app/docs/api
+    expectedStatusCodes:
+      - 200
+
+  - name: Pricing page
+    url: https://www.myocr.app/pricing
+    expectedStatusCodes:
+      - 200
+
+  - name: Account API dashboard
+    url: https://www.myocr.app/account/api
+    # Redirect to login expected (302)
+    expectedStatusCodes:
+      - 200
+      - 302
+      - 303
+
+  - name: Sitemap
+    url: https://www.myocr.app/sitemap.xml
+    expectedStatusCodes:
+      - 200
+
+  - name: OpenAPI spec
+    url: https://www.myocr.app/static/openapi.yaml
+    expectedStatusCodes:
+      - 200
+
+status-website:
+  cname: status.myocr.app
+  baseUrl: /
+  name: myocr.app status
+  introTitle: "myocr.app — service status"
+  introMessage: |
+    Real-time uptime and incident tracking for myocr.app services.
+    Checks run every 5 minutes from GitHub Actions globally.
+
+    For support: info@myocr.app
+  navbar:
+    - title: Status
+      href: /
+    - title: API Docs
+      href: https://www.myocr.app/docs/api
+    - title: Get API key
+      href: https://www.myocr.app/account/api
+    - title: GitHub
+      href: https://github.com/Selaf688/myocr-status
+  logoUrl: https://www.myocr.app/static/images/pdf-to-excel-myocr-logo.png
+  theme: light
+  themeOptions:
+    primary: '#3b82f6'
+  workflowSchedule:
+    graphs: '0 0 * * *'
+    responseTime: '0 23 * * *'
+    staticSite: '0 1 * * *'
+    summary: '0 0 * * *'
+    updates: '0 0 * * *'
+    updateTemplate: '0 0 * * *'
+
+assignees:
+  - Selaf688
+
+i18n:
+  activeIncidents: Active incidents
+  allSystemsOperational: All systems operational
+  incidentReport: 'Incident report:'
+  ongoingIncidents: Ongoing incidents
+
+notifications:
+  # - type: slack
+  #   channel: '#alerts'
+  #   token: $SLACK_WEBHOOK_URL
+  # - type: telegram
+  #   chatId: '$TELEGRAM_CHAT_ID'
+  #   token: '$TELEGRAM_BOT_TOKEN'
